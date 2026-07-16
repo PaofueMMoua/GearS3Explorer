@@ -1,11 +1,17 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from ui.main_window import MainWindow
-from core.sdb import SDBManager
 
-app = QApplication(sys.argv)
+def main():
+    # Initialize the PySide6 Application
+    app = QApplication(sys.argv)
 
-window = MainWindow()
-window.show()
+    # Create and show the main UI window
+    window = MainWindow()
+    window.show()
 
-sys.exit(app.exec())
+    # Start the application event loop
+    sys.exit(app.exec())
+
+if __name__ == "__main__":
+    main()
