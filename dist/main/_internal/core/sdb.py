@@ -15,11 +15,21 @@ class SDBManager:
         )
 
     def _run(self, args: list[str]):
-        """Runs an SDB command and returns: (return_code, stdout, stderr)"""
+        """
+        Runs an SDB command silently in the background without spawning console windows.
+        """
+        import sys
+        
+        # Windows-specific flag to completely hide the cmd window spawned by subprocess
+        creationflags = 0
+        if sys.platform == "win32":
+            creationflags = subprocess.CREATE_NO_WINDOW  # Equivalent to 0x08000000
+
         result = subprocess.run(
             [str(self.sdb)] + args,
             capture_output=True,
             text=True,
+            creationflags=creationflags  # Forces the command to run invisibly
         )
         return (
             result.returncode,
